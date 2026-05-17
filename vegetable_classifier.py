@@ -15,7 +15,7 @@ Update DATASET_PATH before running.
 # ─────────────────────────────────────────────
 # CONFIGURATION  ← only line you need to edit
 # ─────────────────────────────────────────────
-DATASET_PATH = "augmented_dataset"   # <-- set this
+DATASET_PATH = "balanced_dataset"    # <-- set this
 
 IMAGE_SIZE    = (128, 128)   # resize all images to this
 BATCH_SIZE    = 32
@@ -34,6 +34,7 @@ from tensorflow.keras.layers import (
     Conv2D, MaxPooling2D, Flatten, Dense, Dropout
 )
 from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.callbacks import EarlyStopping
 
 
 # ── 1. Reproducibility ───────────────────────────────────────────────────────
@@ -45,6 +46,10 @@ np.random.seed(RANDOM_SEED)
 # No augmentation — only rescaling and a 70 / 30 split.
 datagen = ImageDataGenerator(
     rescale          = 1.0 / 255,
+    rotation_range   = 10,
+    zoom_range       = 0.1,
+    horizontal_flip  = True,
+    brightness_range = [0.8, 1.2],
     validation_split = 0.30,        # 30 % held out (will become val + test)
 )
 
@@ -141,11 +146,18 @@ model.compile(
 
 
 # ── 7. Train ──────────────────────────────────────────────────────────────────
+early = EarlyStopping(
+    monitor             = 'val_loss',
+    patience            = 5,
+    restore_best_weights = True
+)
+
 print("\nTraining …\n")
 history = model.fit(
     train_gen,
     epochs          = EPOCHS,
     validation_data = (X_val, y_val),
+    callbacks       = [early],
     verbose         = 1,
 )
 
