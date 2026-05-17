@@ -15,7 +15,7 @@ Update DATASET_PATH before running.
 # ─────────────────────────────────────────────
 # CONFIGURATION  ← only line you need to edit
 # ─────────────────────────────────────────────
-DATASET_PATH = "/path/to/your/vegetable_dataset"   # <-- set this
+DATASET_PATH = "augmented_dataset"   # <-- set this
 
 IMAGE_SIZE    = (128, 128)   # resize all images to this
 BATCH_SIZE    = 32
