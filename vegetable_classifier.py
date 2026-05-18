@@ -124,7 +124,7 @@ def build_model(input_shape, num_classes):
         # Fully-connected head
         Flatten(),
         Dense(128, activation="relu"),
-        Dropout(0.5),
+        Dropout(0.3),
         Dense(num_classes, activation="softmax"),
     ], name="VegetableCNN")
     return model
