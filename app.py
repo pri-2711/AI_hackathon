@@ -88,15 +88,269 @@ def inject_style():
     st.markdown(
         """
         <style>
-        .main { background-color: #0d1117; color: #e5e7eb; }
-        section[data-testid='stSidebar'] { background-color: #0b1220; }
-        .css-1d391kg { color: #f8fafc; }
-        .stButton>button { background-color: #1f6feb; color: white; }
-        .st-b5 { background-color: rgba(96, 165, 250, 0.12); }
-        .css-1v0mbdj { color: #e5e7eb; }
-        .css-18ni7ap { color: #cbd5e1; }
-        .css-1aumxhk { background-color: #111827; }
-        .css-1cgyl8q { background-color: #111827; }
+        /* ── Google Fonts ── */
+        @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap');
+
+        /* ── Root palette ── */
+        :root {
+            --bg-base:        #070e09;
+            --bg-surface:     #0c1810;
+            --bg-raised:      #122016;
+            --bg-hover:       #1a2e1e;
+            --border:         #1f3826;
+            --border-bright:  #2d5038;
+            --accent:         #3a8c52;
+            --accent-soft:    #2a6640;
+            --accent-glow:    rgba(58, 140, 82, 0.18);
+            --accent-light:   #6fc98a;
+            --text-primary:   #e8f2ea;
+            --text-secondary: #8aab90;
+            --text-muted:     #4d6e54;
+            --success:        #4caf72;
+            --warning:        #c8a84b;
+            --danger:         #c85a4c;
+            --radius-sm:      6px;
+            --radius-md:      12px;
+            --radius-lg:      18px;
+        }
+
+        /* ── Global reset ── */
+        html, body, [class*="css"] {
+            font-family: 'DM Mono', monospace !important;
+            background-color: var(--bg-base) !important;
+            color: var(--text-primary) !important;
+        }
+
+        /* ── App wrapper ── */
+        .main .block-container {
+            background-color: var(--bg-base) !important;
+            padding: 2rem 2.5rem 4rem !important;
+            max-width: 1200px !important;
+        }
+
+        /* ── Sidebar ── */
+        section[data-testid="stSidebar"] {
+            background-color: var(--bg-surface) !important;
+            border-right: 1px solid var(--border) !important;
+        }
+        section[data-testid="stSidebar"] * {
+            color: var(--text-secondary) !important;
+        }
+
+        /* ── Headings ── */
+        h1 {
+            font-family: 'DM Serif Display', serif !important;
+            font-size: 3.2rem !important;
+            font-weight: 400 !important;
+            letter-spacing: -0.5px !important;
+            color: var(--accent-light) !important;
+            line-height: 1.1 !important;
+            margin-bottom: 0 !important;
+        }
+        h2, h3 {
+            font-family: 'DM Serif Display', serif !important;
+            font-weight: 400 !important;
+            color: var(--text-primary) !important;
+            letter-spacing: 0.2px !important;
+        }
+        h5 {
+            font-family: 'DM Mono', monospace !important;
+            font-size: 0.78rem !important;
+            font-weight: 300 !important;
+            letter-spacing: 2.5px !important;
+            text-transform: uppercase !important;
+            color: var(--text-muted) !important;
+            margin-top: 0.1rem !important;
+        }
+        h4 {
+            font-family: 'DM Serif Display', serif !important;
+            font-weight: 400 !important;
+            color: var(--accent-light) !important;
+            font-size: 1.3rem !important;
+        }
+
+        /* ── Divider ── */
+        hr {
+            border: none !important;
+            border-top: 1px solid var(--border) !important;
+            margin: 1.8rem 0 !important;
+        }
+
+        /* ── File uploader ── */
+        [data-testid="stFileUploader"] {
+            background-color: var(--bg-surface) !important;
+            border: 1.5px dashed var(--border-bright) !important;
+            border-radius: var(--radius-md) !important;
+            padding: 1.2rem !important;
+            transition: border-color 0.2s ease, background 0.2s ease !important;
+        }
+        [data-testid="stFileUploader"]:hover {
+            border-color: var(--accent) !important;
+            background-color: var(--bg-hover) !important;
+        }
+        [data-testid="stFileUploader"] * {
+            color: var(--text-secondary) !important;
+        }
+
+        /* ── Camera input ── */
+        [data-testid="stCameraInput"] {
+            border: 1.5px solid var(--border) !important;
+            border-radius: var(--radius-md) !important;
+            overflow: hidden !important;
+            background: var(--bg-surface) !important;
+        }
+        [data-testid="stCameraInput"] button {
+            background-color: var(--bg-raised) !important;
+            color: var(--text-secondary) !important;
+            border: 1px solid var(--border-bright) !important;
+        }
+
+        /* ── Image display ── */
+        [data-testid="stImage"] img {
+            border-radius: var(--radius-md) !important;
+            border: 1px solid var(--border) !important;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.5) !important;
+        }
+
+        /* ── Primary button ── */
+        .stButton > button {
+            background: linear-gradient(135deg, var(--accent-soft) 0%, var(--accent) 100%) !important;
+            color: #fff !important;
+            font-family: 'DM Mono', monospace !important;
+            font-size: 0.78rem !important;
+            font-weight: 500 !important;
+            letter-spacing: 1.8px !important;
+            text-transform: uppercase !important;
+            border: none !important;
+            border-radius: var(--radius-sm) !important;
+            padding: 0.6rem 1.6rem !important;
+            transition: all 0.2s ease !important;
+            box-shadow: 0 2px 12px var(--accent-glow) !important;
+        }
+        .stButton > button:hover {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%) !important;
+            box-shadow: 0 4px 20px rgba(58,140,82,0.35) !important;
+            transform: translateY(-1px) !important;
+        }
+        .stButton > button:active {
+            transform: translateY(0px) !important;
+        }
+
+        /* ── Success / info / warning / error banners ── */
+        [data-testid="stAlert"] {
+            border-radius: var(--radius-md) !important;
+            border: none !important;
+            font-family: 'DM Mono', monospace !important;
+            font-size: 0.85rem !important;
+        }
+        div[data-testid="stAlert"][data-baseweb="notification"] {
+            background-color: rgba(76, 175, 114, 0.1) !important;
+            border-left: 3px solid var(--success) !important;
+            color: var(--accent-light) !important;
+        }
+        div.stWarning > div {
+            background-color: rgba(200, 168, 75, 0.08) !important;
+            border-left: 3px solid var(--warning) !important;
+        }
+        div.stError > div {
+            background-color: rgba(200, 90, 76, 0.08) !important;
+            border-left: 3px solid var(--danger) !important;
+        }
+        div.stInfo > div {
+            background-color: rgba(58, 140, 82, 0.08) !important;
+            border-left: 3px solid var(--accent) !important;
+            color: var(--text-secondary) !important;
+        }
+
+        /* ── Radio buttons ── */
+        [data-testid="stRadio"] label {
+            font-family: 'DM Mono', monospace !important;
+            font-size: 0.75rem !important;
+            letter-spacing: 1px !important;
+            text-transform: uppercase !important;
+            color: var(--text-secondary) !important;
+        }
+        [data-testid="stRadio"] [data-baseweb="radio"] > div:first-child {
+            border-color: var(--accent) !important;
+            background-color: transparent !important;
+        }
+        [data-testid="stRadio"] [aria-checked="true"] [data-baseweb="radio"] > div:first-child {
+            background-color: var(--accent) !important;
+        }
+
+        /* ── Scan cards ── */
+        .scan-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 1rem 1.1rem 0.8rem;
+            margin-bottom: 1rem;
+            transition: border-color 0.2s ease, background 0.2s ease;
+        }
+        .scan-card:hover {
+            border-color: var(--border-bright);
+            background: var(--bg-raised);
+        }
+        .scan-label {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.05rem;
+            color: var(--accent-light);
+            display: inline-block;
+            margin-bottom: 0.1rem;
+        }
+        .scan-meta {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.8px;
+            color: var(--text-muted);
+            margin-bottom: 0.6rem;
+        }
+        .confidence-bar-wrap {
+            height: 3px;
+            background: var(--border);
+            border-radius: 99px;
+            margin: 0.5rem 0 0.25rem;
+            overflow: hidden;
+        }
+        .confidence-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-soft), var(--accent-light));
+            border-radius: 99px;
+        }
+        .confidence-text {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            color: var(--accent);
+        }
+
+        /* ── Subheader refinement ── */
+        [data-testid="stMarkdownContainer"] p {
+            font-family: 'DM Mono', monospace !important;
+            font-size: 0.85rem !important;
+            color: var(--text-secondary) !important;
+            line-height: 1.7 !important;
+        }
+
+        /* ── Scrollbar ── */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-base); }
+        ::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius: 99px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent-soft); }
+
+        /* ── Subtle grid texture on body ── */
+        .main::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(var(--border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.18;
+            pointer-events: none;
+            z-index: 0;
+        }
         </style>
         """,
         unsafe_allow_html=True,
@@ -169,13 +423,30 @@ def main():
                 recent = load_recent_scans(collection, limit=6, filter_label=query_label)
                 if recent:
                     for scan in recent:
-                        st.write(f"**{scan['label'].title()}** — {format_timestamp(scan['timestamp'])}")
+                        conf_pct = scan['confidence'] * 100
+                        st.markdown(
+                            f"""
+                            <div class="scan-card">
+                                <div class="scan-label">{scan['label'].title()}</div>
+                                <div class="scan-meta">{format_timestamp(scan['timestamp'])}</div>
+                            """,
+                            unsafe_allow_html=True,
+                        )
                         try:
                             image_data = base64.b64decode(scan["image_bytes"])
                             st.image(image_data, width=280)
                         except Exception:
                             st.write("Unable to load saved preview.")
-                        st.markdown(f"Confidence: **{scan['confidence'] * 100:.1f}%**")
+                        st.markdown(
+                            f"""
+                                <div class="confidence-bar-wrap">
+                                    <div class="confidence-bar-fill" style="width:{conf_pct:.1f}%"></div>
+                                </div>
+                                <div class="confidence-text">Confidence: {conf_pct:.1f}%</div>
+                            </div>
+                            """,
+                            unsafe_allow_html=True,
+                        )
                         st.markdown("---")
                 else:
                     st.info("No recent scans yet. Start by uploading a vegetable image!")
